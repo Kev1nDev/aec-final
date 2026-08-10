@@ -1,6 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./ProjectsGallery.module.css";
 
+interface Project {
+  id: string;
+  image: string;
+  title: string;
+  subtitle: string;
+  bg: string;
+  size: string;
+}
+
 const projects = [
   {
     id: "aec-p01",
@@ -50,7 +59,7 @@ const projects = [
     bg: "linear-gradient(145deg, #0891b2 0%, #06b6d4 50%, #22d3ee 100%)",
     size: "xlarge",
   },
-];
+] as const;
 
 const ProjectsGallery = () => {
   const sectionRef = useRef<HTMLElement>(null);
