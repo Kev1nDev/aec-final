@@ -1,0 +1,15 @@
+.landingPage {
+  width: 100%;
+  position: relative;
+  background-color: var(--bg-primary);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  font-size: clamp(48px, 8vw, 111px);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
