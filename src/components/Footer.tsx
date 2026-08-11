@@ -1,36 +1,36 @@
 import styles from "./Footer.module.css";
 
+const footerLinks = [
+  {
+    title: "Productos",
+    links: [
+      { label: "Silicon AEC-P01", href: "#productos" },
+      { label: "Bomba de Gasolina AEC-P02", href: "#productos" },
+      { label: "Limpia Carburador AEC-P03", href: "#productos" },
+      { label: "Catálogo Completo", href: "https://catalogohidromack.aec-ve.com" },
+    ],
+  },
+  {
+    title: "Empresa",
+    links: [
+      { label: "Nosotros", href: "#nosotros" },
+      { label: "Distribuidores", href: "#distribuidor" },
+      { label: "Garantía", href: "#" },
+      { label: "Contacto", href: "#contacto" },
+    ],
+  },
+  {
+    title: "Recursos",
+    links: [
+      { label: "Fichas Técnicas", href: "#" },
+      { label: "Certificaciones", href: "#" },
+      { label: "Preguntas Frecuentes", href: "#" },
+    ],
+  },
+];
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
-  const footerLinks = [
-    {
-      title: "Productos",
-      links: [
-        { label: "Silicon AEC-P01", href: "#productos" },
-        { label: "Bomba de Gasolina AEC-P02", href: "#productos" },
-        { label: "Limpia Carburador AEC-P03", href: "#productos" },
-        { label: "Catálogo Completo", href: "https://catalogohidromack.aec-ve.com" },
-      ],
-    },
-    {
-      title: "Empresa",
-      links: [
-        { label: "Nosotros", href: "#nosotros" },
-        { label: "Distribuidores", href: "#distribuidor" },
-        { label: "Garantía", href: "#" },
-        { label: "Contacto", href: "#contacto" },
-      ],
-    },
-    {
-      title: "Recursos",
-      links: [
-        { label: "Fichas Técnicas", href: "#" },
-        { label: "Certificaciones", href: "#" },
-        { label: "Preguntas Frecuentes", href: "#" },
-      ],
-    },
-  ];
 
   return (
     <footer id="contacto" className={styles.footer}>
@@ -58,7 +58,7 @@ const Footer = () => {
                       <a
                         href={link.href}
                         target={link.href.startsWith("http") ? "_blank" : undefined}
-                        rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                        rel="noopener noreferrer"
                         className={styles.linkItem}
                       >
                         {link.label}

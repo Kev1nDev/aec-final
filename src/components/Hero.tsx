@@ -41,7 +41,11 @@ const Hero = () => {
               style={{ animationDelay: "0.65s" }}
               onSubmit={(e) => e.preventDefault()}
             >
+              <label htmlFor="hero-email" className={styles.visuallyHidden}>
+                Tu correo empresarial
+              </label>
               <input
+                id="hero-email"
                 className={styles.input}
                 type="email"
                 placeholder="Tu correo empresarial"

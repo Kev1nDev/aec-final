@@ -1,23 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import styles from "./About.module.css";
 
 const About = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const { ref: sectionRef, visible } = useIntersectionObserver({ threshold: 0.2 });
 
   return (
     <section id="nosotros" ref={sectionRef} className={styles.about}>

@@ -478,3 +478,24 @@
     font-size: 16px;
   }
 }
+
+/* ACCESSIBILITY */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ANIMATION DELAY UTILITIES */
+.delay05 { animation-delay: 0.05s !important; }
+.delay18 { animation-delay: 0.18s !important; }
+.delay32 { animation-delay: 0.32s !important; }
+.delay50 { animation-delay: 0.5s !important; }
+.delay65 { animation-delay: 0.65s !important; }
+.delay80 { animation-delay: 0.8s !important; }

@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import { ArrowIcon } from "./icons/ArrowIcon";
 import styles from "./Products.module.css";
 
 interface Product {
@@ -42,22 +43,7 @@ const products: Product[] = [
 ];
 
 const Products = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const { ref: sectionRef, visible } = useIntersectionObserver({ threshold: 0.15 });
 
   return (
     <section id="productos" ref={sectionRef} className={styles.products}>
@@ -114,9 +100,7 @@ const Products = () => {
                   style={{ color: product.tagColor }}
                 >
                   Ver en catálogo
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  <ArrowIcon size={14} />
                 </a>
               </div>
             </div>
