@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Stats from "../components/Stats";
 import Products from "../components/Products";
+import ComparisonCTA from "../components/ComparisonCTA";
 import ProjectsGallery from "../components/ProjectsGallery";
 import Showcase from "../components/Showcase";
 import { FeaturesSectionWithHoverEffects } from "../components/ui/FeatureSection";
@@ -16,6 +17,7 @@ const LandingPage = () => {
       <Hero />
       <Stats />
       <Products />
+      <ComparisonCTA />
       <ProjectsGallery />
       <Showcase />
       <FeaturesSectionWithHoverEffects />
