@@ -55,6 +55,7 @@ const projects = [
 
 const ProjectsGallery = () => {
   const { ref: sectionRef, visible } = useIntersectionObserver({ threshold: 0.1 });
+  const [p0, p1, p2, p3, p4, p5] = projects;
 
   return (
     <section ref={sectionRef} className={styles.gallery}>
@@ -73,55 +74,55 @@ const ProjectsGallery = () => {
           <div className={styles.column}>
             <div
               className={`${styles.card} ${styles.cardLarge} ${visible ? styles.visible : ""}`}
-              style={{ transitionDelay: "0.05s", background: projects[0].bg }}
+              style={{ transitionDelay: "0.05s", background: p0.bg }}
             >
               <div className={styles.cardContent}>
                 <img
-                  src={projects[0].image}
-                  alt={projects[0].subtitle}
+                  src={p0.image}
+                  alt={p0.subtitle}
                   className={styles.cardImage}
                   loading="lazy"
                 />
               </div>
               <div className={styles.cardOverlay}>
-                <span className={styles.cardTag}>{projects[0].title}</span>
-                <span className={styles.cardName}>{projects[0].subtitle}</span>
+                <span className={styles.cardTag}>{p0.title}</span>
+                <span className={styles.cardName}>{p0.subtitle}</span>
               </div>
             </div>
 
             <div
               className={`${styles.card} ${styles.cardSmall} ${visible ? styles.visible : ""}`}
-              style={{ transitionDelay: "0.12s", background: projects[1].bg }}
+              style={{ transitionDelay: "0.12s", background: p1.bg }}
             >
               <div className={styles.cardContent}>
                 <img
-                  src={projects[1].image}
-                  alt={projects[1].subtitle}
+                  src={p1.image}
+                  alt={p1.subtitle}
                   className={styles.cardImage}
                   loading="lazy"
                 />
               </div>
               <div className={styles.cardOverlay}>
-                <span className={styles.cardTag}>{projects[1].title}</span>
-                <span className={styles.cardName}>{projects[1].subtitle}</span>
+                <span className={styles.cardTag}>{p1.title}</span>
+                <span className={styles.cardName}>{p1.subtitle}</span>
               </div>
             </div>
 
             <div
               className={`${styles.card} ${styles.cardMedium} ${visible ? styles.visible : ""}`}
-              style={{ transitionDelay: "0.2s", background: projects[4].bg }}
+              style={{ transitionDelay: "0.2s", background: p4.bg }}
             >
               <div className={styles.cardContent}>
                 <img
-                  src={projects[4].image}
-                  alt={projects[4].subtitle}
+                  src={p4.image}
+                  alt={p4.subtitle}
                   className={styles.cardImage}
                   loading="lazy"
                 />
               </div>
               <div className={styles.cardOverlay}>
-                <span className={styles.cardTag}>{projects[4].title}</span>
-                <span className={styles.cardName}>{projects[4].subtitle}</span>
+                <span className={styles.cardTag}>{p4.title}</span>
+                <span className={styles.cardName}>{p4.subtitle}</span>
               </div>
             </div>
 
@@ -144,55 +145,55 @@ const ProjectsGallery = () => {
           <div className={styles.column}>
             <div
               className={`${styles.card} ${styles.cardTall} ${visible ? styles.visible : ""}`}
-              style={{ transitionDelay: "0.08s", background: projects[2].bg }}
+              style={{ transitionDelay: "0.08s", background: p2.bg }}
             >
               <div className={styles.cardContent}>
                 <img
-                  src={projects[2].image}
-                  alt={projects[2].subtitle}
+                  src={p2.image}
+                  alt={p2.subtitle}
                   className={styles.cardImage}
                   loading="lazy"
                 />
               </div>
               <div className={styles.cardOverlay}>
-                <span className={styles.cardTag}>{projects[2].title}</span>
-                <span className={styles.cardName}>{projects[2].subtitle}</span>
+                <span className={styles.cardTag}>{p2.title}</span>
+                <span className={styles.cardName}>{p2.subtitle}</span>
               </div>
             </div>
 
             <div
               className={`${styles.card} ${styles.cardWide} ${visible ? styles.visible : ""}`}
-              style={{ transitionDelay: "0.15s", background: projects[3].bg }}
+              style={{ transitionDelay: "0.15s", background: p3.bg }}
             >
               <div className={styles.cardContent}>
                 <img
-                  src={projects[3].image}
-                  alt={projects[3].subtitle}
+                  src={p3.image}
+                  alt={p3.subtitle}
                   className={styles.cardImage}
                   loading="lazy"
                 />
               </div>
               <div className={styles.cardOverlay}>
-                <span className={styles.cardTag}>{projects[3].title}</span>
-                <span className={styles.cardName}>{projects[3].subtitle}</span>
+                <span className={styles.cardTag}>{p3.title}</span>
+                <span className={styles.cardName}>{p3.subtitle}</span>
               </div>
             </div>
 
             <div
               className={`${styles.card} ${styles.cardXLarge} ${visible ? styles.visible : ""}`}
-              style={{ transitionDelay: "0.25s", background: projects[5].bg }}
+              style={{ transitionDelay: "0.25s", background: p5.bg }}
             >
               <div className={styles.cardContent}>
                 <img
-                  src={projects[5].image}
-                  alt={projects[5].subtitle}
+                  src={p5.image}
+                  alt={p5.subtitle}
                   className={styles.cardImage}
                   loading="lazy"
                 />
               </div>
               <div className={styles.cardOverlay}>
-                <span className={styles.cardTag}>{projects[5].title}</span>
-                <span className={styles.cardName}>{projects[5].subtitle}</span>
+                <span className={styles.cardTag}>{p5.title}</span>
+                <span className={styles.cardName}>{p5.subtitle}</span>
               </div>
             </div>
           </div>
