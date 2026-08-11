@@ -87,19 +87,6 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className={styles.brandBar}>
-        <div className={styles.brandBarInner}>
-          <span className={styles.brandBarLabel}>COMPATIBILIDAD OEM PARA:</span>
-          <div className={styles.brandLogos}>
-            <span className={styles.brandLogo}>TOYOTA</span>
-            <span className={styles.brandLogo}>FORD</span>
-            <span className={styles.brandLogo}>CHEVROLET</span>
-            <span className={styles.brandLogo}>MACK</span>
-            <span className={styles.brandLogo}>CATERPILLAR</span>
-            <span className={styles.brandLogo}>IVECO</span>
-          </div>
-        </div>
-      </div>
     </section>
   );
 };
