@@ -200,6 +200,7 @@
   opacity: 0;
   animation: revealUp 0.7s var(--ease-out-expo) forwards;
   flex-wrap: wrap;
+  margin-bottom: 32px;
 }
 
 .avatars {
