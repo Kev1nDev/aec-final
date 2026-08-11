@@ -3,7 +3,7 @@ import styles from "./About.module.css";
 
 const About = () => {
   const { ref: sectionRef, visible } = useIntersectionObserver({ threshold: 0.2 });
-
+// Observe the section for intersection
   return (
     <section id="nosotros" ref={sectionRef} className={styles.about}>
       <div className={styles.inner}>
