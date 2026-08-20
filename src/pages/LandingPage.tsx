@@ -1,5 +1,11 @@
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
+import { Header } from "../components/ui/Header";
+import { MinimalistHero } from "../components/ui/MinimalistHero";
+import {
+  IconBrandInstagram,
+  IconBrandYoutube,
+  IconBrandX,
+  IconBrandLinkedin,
+} from "@tabler/icons-react";
 import { Marquee } from "../components/Marquee";
 import Stats from "../components/Stats";
 import Products from "../components/Products";
@@ -13,15 +19,30 @@ import Footer from "../components/Footer";
 
 const LandingPage = () => {
   return (
-    <div style={{ background: "var(--bg-primary)", minHeight: "100vh" }}>
-      <Navbar />
-      <Hero />
-      <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-        <Marquee direction="left" baseVelocity={2} className="green">
-          MÁXIMO RENDIMIENTO · PRODUCTOS DE CALIDAD · GARANTÍA PROPIA AEC-VE · COMPATIBILIDAD OEM · CALIDAD CERTIFICADA · DISTRIBUIDOR OFICIAL SUPER HIDROMACK, C.A. · STOCK DISPONIBLE · ESTÁNDARES INTERNACIONALES
+    <div className="min-h-screen bg-bg-primary">
+      <Header />
+      <MinimalistHero
+        imageSrc="/aec-producto-2.png"
+        imageAlt="AEC Gasket Maker Ultra Grey - Tubo en mano"
+        overlayText={{ part1: "REPUESTOS DE", part2: "ALTO RENDIMIENTO" }}
+        socialLinks={[
+          { icon: IconBrandInstagram, href: "#" },
+          { icon: IconBrandYoutube, href: "#" },
+          { icon: IconBrandX, href: "#" },
+          { icon: IconBrandLinkedin, href: "#" },
+        ]}
+        locationText="Venezuela — Cobertura Nacional"
+      />
+      <div className="mt-8 flex flex-col gap-1.5">
+        <Marquee direction="left" baseVelocity={2} className="bg-accent-secondary">
+          MÁXIMO RENDIMIENTO · PRODUCTOS DE CALIDAD · GARANTÍA PROPIA AEC-VE · COMPATIBILIDAD OEM ·
+          CALIDAD CERTIFICADA · DISTRIBUIDOR OFICIAL SUPER HIDROMACK, C.A. · STOCK DISPONIBLE ·
+          ESTÁNDARES INTERNACIONALES
         </Marquee>
-        <Marquee direction="right" baseVelocity={2} className="blue">
-          GARANTÍA AEC-VE · RESPALDO DIRECTO · TRAZABILIDAD COMPLETA · SOPORTE TÉCNICO ESPECIALIZADO · LOGÍSTICA DIRECTA DESDE PLANTA · PRECIO COMPETITIVO · COBERTURA NACIONAL · REPUESTOS AUTOMOTRICES DE CONFIANZA
+        <Marquee direction="right" baseVelocity={2} className="bg-accent-primary">
+          GARANTÍA AEC-VE · RESPALDO DIRECTO · TRAZABILIDAD COMPLETA · SOPORTE TÉCNICO ESPECIALIZADO
+          · LOGÍSTICA DIRECTA DESDE PLANTA · PRECIO COMPETITIVO · COBERTURA NACIONAL · REPUESTOS
+          AUTOMOTRICES DE CONFIANZA
         </Marquee>
       </div>
       <Stats />

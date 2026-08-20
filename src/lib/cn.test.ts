@@ -39,4 +39,20 @@ describe("cn", () => {
     // Assert
     expect(result).toBe("single");
   });
+
+  it("should resolve conflicting tailwind classes keeping the last one", () => {
+    // Arrange & Act
+    const result = cn("px-4 py-2", "px-6");
+
+    // Assert
+    expect(result).toBe("py-2 px-6");
+  });
+
+  it("should merge conditional tailwind classes", () => {
+    // Arrange & Act
+    const result = cn("bg-bg-primary", false && "bg-bg-secondary", "md:px-4");
+
+    // Assert
+    expect(result).toBe("bg-bg-primary md:px-4");
+  });
 });

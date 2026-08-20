@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, act } from "@testing-library/react";
+import { useEffect } from "react";
 import { useIntersectionObserver } from "./useIntersectionObserver";
 
 function TestComponent({
@@ -13,9 +14,11 @@ function TestComponent({
 }) {
   const { ref, visible } = useIntersectionObserver({ threshold, triggerOnce });
 
-  if (onVisible) {
-    onVisible(visible);
-  }
+  useEffect(() => {
+    if (onVisible) {
+      onVisible(visible);
+    }
+  }, [visible, onVisible]);
 
   return (
     <div ref={ref as React.RefObject<HTMLDivElement> | undefined} data-testid="observable">
@@ -33,15 +36,16 @@ describe("useIntersectionObserver", () => {
     observeMock = vi.fn();
     disconnectMock = vi.fn();
 
-    const MockIntersectionObserver = vi.fn(
-      function (this: IntersectionObserver, callback: IntersectionObserverCallback) {
-        intersectionCallback = callback;
-        return {
-          observe: observeMock,
-          disconnect: disconnectMock,
-        };
-      }
-    );
+    const MockIntersectionObserver = vi.fn(function (
+      this: IntersectionObserver,
+      callback: IntersectionObserverCallback,
+    ) {
+      intersectionCallback = callback;
+      return {
+        observe: observeMock,
+        disconnect: disconnectMock,
+      };
+    });
 
     vi.stubGlobal("IntersectionObserver", MockIntersectionObserver);
   });
@@ -86,7 +90,7 @@ describe("useIntersectionObserver", () => {
               target: div,
             } as unknown as IntersectionObserverEntry,
           ],
-          {} as IntersectionObserver
+          {} as IntersectionObserver,
         );
       }
     });
@@ -110,7 +114,7 @@ describe("useIntersectionObserver", () => {
               target: div,
             } as unknown as IntersectionObserverEntry,
           ],
-          {} as IntersectionObserver
+          {} as IntersectionObserver,
         );
       }
     });
@@ -134,7 +138,7 @@ describe("useIntersectionObserver", () => {
               target: div,
             } as unknown as IntersectionObserverEntry,
           ],
-          {} as IntersectionObserver
+          {} as IntersectionObserver,
         );
       }
     });

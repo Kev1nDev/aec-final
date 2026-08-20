@@ -1,16 +1,18 @@
 import { useRef } from "react";
 import {
-  motion,
+  LazyMotion,
+  domAnimation,
+  m,
   useScroll,
   useSpring,
   useTransform,
   useMotionValue,
   useVelocity,
   useAnimationFrame,
+  useReducedMotion,
 } from "framer-motion";
 import { wrap } from "@motionone/utils";
 import { cn } from "../lib/cn";
-import styles from "./Marquee.module.css";
 
 type MarqueeProps = {
   children: string;
@@ -38,8 +40,14 @@ export function Marquee({
 
   const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
 
+  const shouldReduceMotion = useReducedMotion();
+
   const directionFactor = useRef<number>(1);
   useAnimationFrame((_t, delta) => {
+    if (shouldReduceMotion) {
+      return;
+    }
+
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
     if (direction === "left") {
@@ -54,16 +62,19 @@ export function Marquee({
   });
 
   return (
-    <div className={cn(styles.wrapper, className)}>
-      <motion.div
-        className={styles.track}
-        style={{ x }}
-      >
-        <span>{children}</span>
-        <span>{children}</span>
-        <span>{children}</span>
-        <span>{children}</span>
-      </motion.div>
-    </div>
+    <LazyMotion features={domAnimation}>
+      <div className={cn("relative w-full overflow-hidden", className)}>
+        <m.div
+          className="flex py-2.5 font-display text-[clamp(18px,2.5vw,28px)] font-normal tracking-[2px] text-white uppercase whitespace-nowrap max-sm:py-2 max-sm:text-sm"
+          style={{ x }}
+        >
+          {Array.from({ length: 4 }).map((_, i) => (
+            <span key={i} className="mr-9 block shrink-0 max-sm:mr-6">
+              {children}
+            </span>
+          ))}
+        </m.div>
+      </div>
+    </LazyMotion>
   );
 }

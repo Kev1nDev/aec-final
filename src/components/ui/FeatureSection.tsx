@@ -9,7 +9,7 @@ import {
   IconPackage,
   IconChartBar,
 } from "@tabler/icons-react";
-import styles from "./FeatureSection.module.css";
+import { cn } from "../../lib/cn";
 
 const features = [
   {
@@ -66,49 +66,81 @@ export function FeaturesSectionWithHoverEffects() {
   const { ref: sectionRef, visible } = useIntersectionObserver({ threshold: 0.1 });
 
   return (
-    <section ref={sectionRef} className={styles.section}>
-      <div className={styles.inner}>
-        <div className={styles.header}>
-          <span className={`${styles.overline} ${visible ? styles.visible : ""}`}>
+    <section
+      ref={sectionRef}
+      className="relative z-[2] w-full bg-bg-primary py-[120px] max-sm:py-20"
+    >
+      <div className="mx-auto max-w-[1200px] px-12 max-lg:px-8 max-sm:px-5">
+        <div className="mb-16 text-center">
+          <span
+            className={cn(
+              "mb-5 inline-block rounded-[100px] border border-accent-secondary/20 bg-accent-secondary-light px-4 py-2",
+              "font-mono text-[11px] font-bold tracking-[2px] text-accent-secondary uppercase",
+              "translate-y-5 opacity-0 transition-[opacity,transform] duration-700 ease-out-expo",
+              visible && "translate-y-0 opacity-100",
+            )}
+          >
             POR QUÉ ELEGIR AEC
           </span>
-          <h2 className={`${styles.title} ${visible ? styles.visible : ""}`}>
-            VENTAJAS <span className={styles.accent}>COMPETITIVAS</span>
+          <h2
+            className={cn(
+              "m-0 font-display text-[clamp(48px,7vw,88px)] font-normal leading-[0.95] tracking-[2px] text-text-primary",
+              "translate-y-5 opacity-0 transition-[opacity,transform] delay-100 duration-[800ms] ease-out-expo",
+              "max-sm:text-[clamp(36px,10vw,48px)]",
+              visible && "translate-y-0 opacity-100",
+            )}
+          >
+            VENTAJAS <span className="text-accent-secondary">COMPETITIVAS</span>
           </h2>
         </div>
 
-        <div className={styles.grid}>
+        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((feature, index) => {
             const Icon = feature.icon;
+            const isLast = index === features.length - 1;
+            const even = index % 2 === 0;
+
             return (
               <div
                 key={feature.title}
-                className={`${styles.feature} ${visible ? styles.visible : ""} ${
-                  (index === 0 || index === 4) ? styles.borderLeft : ""
-                } ${index < 4 ? styles.borderBottom : ""}`}
+                className={cn(
+                  "group relative flex flex-col overflow-hidden border-border-subtle py-10",
+                  "translate-y-[30px] opacity-0 transition-[opacity,transform] duration-[600ms] ease-out-expo",
+                  "sm:py-10 max-sm:py-8",
+                  // Bordes móvil (1 col): bottom para todos menos el último
+                  isLast ? "border-b-0" : "border-b",
+                  // Bordes tablet (2 cols): laterales por columna, bottom en las 3 primeras filas
+                  even && "sm:border-l sm:border-r",
+                  index < 6 ? "sm:border-b" : "sm:border-b-0",
+                  // Bordes desktop (4 cols): derecha en todos, izquierda solo en inicios de fila, bottom solo fila 1
+                  "lg:border-r",
+                  even && (index === 0 || index === 4 ? "lg:border-l" : "lg:border-l-0"),
+                  index < 4 ? "lg:border-b" : "lg:border-b-0",
+                  visible && "translate-y-0 opacity-100",
+                )}
                 style={{ transitionDelay: `${index * 0.06}s` }}
               >
-                {/* Hover gradient */}
                 {index < 4 && (
-                  <div className={styles.gradientTop} />
+                  <div className="pointer-events-none absolute inset-0 h-full w-full bg-[linear-gradient(to_top,rgba(37,99,235,0.06),transparent)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 )}
                 {index >= 4 && (
-                  <div className={styles.gradientBottom} />
+                  <div className="pointer-events-none absolute inset-0 h-full w-full bg-[linear-gradient(to_bottom,rgba(5,150,105,0.06),transparent)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 )}
 
-                {/* Icon */}
-                <div className={styles.iconWrapper}>
+                <div className="relative z-10 mb-4 px-8 text-text-muted transition-colors duration-300 group-hover:text-accent-primary">
                   <Icon size={28} stroke={1.5} />
                 </div>
 
-                {/* Title with bar */}
-                <div className={styles.titleWrapper}>
-                  <div className={styles.sideBar} />
-                  <span className={styles.featureTitle}>{feature.title}</span>
+                <div className="relative z-10 mb-2.5 px-8">
+                  <div className="absolute top-1/2 left-0 h-6 w-[3px] -translate-y-1/2 rounded-r bg-border-medium transition-[height,background] duration-300 ease-out-expo group-hover:h-10 group-hover:bg-accent-secondary" />
+                  <span className="inline-block font-body text-[17px] font-bold text-text-primary transition-transform duration-300 ease-out-expo group-hover:translate-x-2">
+                    {feature.title}
+                  </span>
                 </div>
 
-                {/* Description */}
-                <p className={styles.description}>{feature.description}</p>
+                <p className="relative z-10 m-0 max-w-[260px] px-8 font-body text-sm leading-[1.7] text-text-secondary">
+                  {feature.description}
+                </p>
               </div>
             );
           })}

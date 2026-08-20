@@ -1,124 +1,101 @@
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
-import { ArrowIcon } from "./icons/ArrowIcon";
-import styles from "./Products.module.css";
+import { cn } from "../lib/cn";
 
-interface Product {
-  code: string;
-  name: string;
-  description: string;
-  tag: string;
-  tagColor: string;
-  tagBorder: string;
-  image: string;
-}
+const cards = [
+  { src: "/aec-producto-1.png", rotation: "-rotate-3", delay: "0s" },
+  { src: "/aec-producto-2.png", rotation: "rotate-2", delay: "0.5s" },
+  { src: "/aec-producto-3.png", rotation: "rotate-3", delay: "1s" },
+  { src: "/aec-producto-4.png", rotation: "-rotate-2", delay: "1.5s" },
+] as const;
 
-const products: Product[] = [
-  {
-    code: "AEC-P01",
-    name: "Silicon",
-    description: "Sellador multiuso para juntas y superficies. Alto desempeño térmico y resistencia a aceites.",
-    tag: "STOCK DISPONIBLE",
-    tagColor: "#2563eb",
-    tagBorder: "rgba(37,99,235,0.15)",
-    image: "/aec-producto-1.png",
-  },
-  {
-    code: "AEC-P02",
-    name: "Bomba de Gasolina",
-    description: "Suministro estable para sistemas de alimentación. Compatibilidad OEM garantizada.",
-    tag: "NUEVO",
-    tagColor: "#10b981",
-    tagBorder: "rgba(16,185,129,0.2)",
-    image: "/aec-producto-2.png",
-  },
-  {
-    code: "AEC-P03",
-    name: "Limpia Carburador",
-    description: "Limpieza efectiva de carburadores y cuerpos de admisión. Fórmula concentrada profesional.",
-    tag: "DISPONIBLE",
-    tagColor: "#2563eb",
-    tagBorder: "rgba(37,99,235,0.15)",
-    image: "/aec-producto-3.png",
-  },
-];
+const FloatingCard = ({
+  src,
+  rotation,
+  delay,
+  visible,
+}: {
+  src: string;
+  rotation: string;
+  delay: string;
+  visible: boolean;
+}) => (
+  <div
+    className={cn(
+      "transition-[opacity,transform] duration-700 ease-out-expo",
+      visible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0",
+    )}
+    style={{ transitionDelay: delay }}
+  >
+    <div
+      className={cn(
+        "animate-float",
+        rotation,
+      )}
+      style={{ animationDelay: delay }}
+    >
+      <img
+        src={src}
+        alt=""
+        className="h-40 w-40 object-contain drop-shadow-xl sm:h-52 sm:w-52 lg:h-64 lg:w-64"
+      />
+    </div>
+  </div>
+);
 
 const Products = () => {
   const { ref: sectionRef, visible } = useIntersectionObserver({ threshold: 0.15 });
 
   return (
-    <section id="productos" ref={sectionRef} className={styles.products}>
-      <div className={styles.inner}>
-        <div className={styles.header}>
-          <span className={`${styles.overline} ${visible ? styles.visible : ""}`}>
-            LÍNEA DE PRODUCTOS
-          </span>
-          <h2 className={`${styles.title} ${visible ? styles.visible : ""}`} style={{ transitionDelay: "0.1s" }}>
-            REPUESTOS DE <span className={styles.accent}>ALTO RENDIMIENTO</span>
-          </h2>
-          <p className={`${styles.desc} ${visible ? styles.visible : ""}`} style={{ transitionDelay: "0.2s" }}>
-            Cada producto AEC es desarrollado bajo estándares de calidad
-            certificada para garantizar el máximo desempeño en condiciones
-            venezolanas.
-          </p>
-        </div>
-
-        <div className={styles.grid}>
-          {products.map((product, i) => (
+    <section
+      id="productos"
+      ref={sectionRef}
+      className="relative z-[2] w-full bg-bg-primary py-[120px] max-sm:py-20"
+    >
+      <div className="mx-auto max-w-[1440px] px-12 max-lg:px-8 max-sm:px-5">
+        <div className="flex flex-col gap-20 lg:gap-32">
+          {/* Block 1 — Text left, cards right */}
+          <div className="flex flex-col items-center gap-10 lg:flex-row lg:justify-between lg:gap-16">
             <div
-              key={product.code}
-              className={`${styles.card} ${visible ? styles.visible : ""}`}
-              style={{ transitionDelay: `${0.25 + i * 0.12}s` }}
+              className={cn(
+                "max-w-lg text-center transition-[opacity,transform] duration-700 ease-out-expo lg:text-left",
+                visible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0",
+              )}
             >
-              <div className={styles.cardTop}>
-                <span
-                  className={styles.tag}
-                  style={{ color: product.tagColor, borderColor: product.tagBorder }}
-                >
-                  {product.tag}
-                </span>
-                <span className={styles.code}>{product.code}</span>
-              </div>
-
-              <div className={styles.cardVisual}>
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className={styles.cardImage}
-                  loading="lazy"
-                />
-              </div>
-
-              <h3 className={styles.cardName}>{product.name}</h3>
-              <p className={styles.cardDesc}>{product.description}</p>
-
-              <div className={styles.cardFooter}>
-                <a
-                  href="https://catalogohidromack.aec-ve.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.cardLink}
-                  style={{ color: product.tagColor }}
-                >
-                  Ver en catálogo
-                  <ArrowIcon size={14} />
-                </a>
-              </div>
+              <h2 className="font-body text-2xl font-semibold leading-tight text-text-primary sm:text-3xl lg:text-4xl">
+                Encuentra el repuesto exacto
+                <br />
+                para tu vehículo{" "}
+                <span className="text-accent-secondary">en minutos</span>.
+              </h2>
             </div>
-          ))}
-        </div>
+            <div className="flex gap-4 sm:gap-6">
+              <FloatingCard {...cards[0]} visible={visible} />
+              <FloatingCard {...cards[1]} visible={visible} />
+            </div>
+          </div>
 
-        <div className={styles.catalogCta}>
-          <a
-            href="https://catalogohidromack.aec-ve.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.catalogBtn}
-          >
-            <span>EXPLORAR CATÁLOGO COMPLETO</span>
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M4 9h10M9 4l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </a>
+          {/* Block 2 — Cards left, text right */}
+          <div className="flex flex-col items-center gap-10 lg:flex-row-reverse lg:justify-between lg:gap-16">
+            <div
+              className={cn(
+                "max-w-lg text-center transition-[opacity,transform] duration-700 ease-out-expo lg:text-right",
+                visible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0",
+              )}
+              style={{ transitionDelay: "0.2s" }}
+            >
+              <h2 className="font-body text-2xl font-semibold leading-tight text-text-primary sm:text-3xl lg:text-4xl">
+                Calidad garantizada en{" "}
+                <span className="text-accent-secondary">cada pieza</span> que instalas.
+              </h2>
+              <p className="mt-4 font-body text-sm leading-relaxed text-text-secondary sm:text-base">
+                Piezas de alta calidad para mantener tu vehículo en óptimas condiciones.
+              </p>
+            </div>
+            <div className="flex gap-4 sm:gap-6">
+              <FloatingCard {...cards[2]} visible={visible} />
+              <FloatingCard {...cards[3]} visible={visible} />
+            </div>
+          </div>
         </div>
       </div>
     </section>
